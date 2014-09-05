@@ -1,0 +1,23 @@
+/**
+ * Footer
+ */
+
+.footer {
+  border-top: 1px solid #dddddd;
+  margin-top: 4em;
+  padding: 1em 0;
+}
+  .footer small {
+    float: left;
+  }
+  .footer nav {
+    float: right;
+    margin: 0;
+    padding: 0;
+  }
+    .footer nav li {
+      float: left;
+      list-style: none;
+      margin: 0 0 0 1em;
+      padding: 0;
+    }

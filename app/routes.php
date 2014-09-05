@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+// Route::get('/', function()
+// {
+// 	return View::make('hello');
+// });
 
-Route::get('users', 'UserController@getIndex');
+
+//
+// Static pages:
+
+Route::get('/', 'PageController@getIndex');

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Home | Recipe Tracker | Your First Web App</title>
 </head>
-<body id="home">
+<body>
 
   <h1>Recipe Tracker</h1>
   <p>

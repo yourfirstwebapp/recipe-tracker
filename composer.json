@@ -7,6 +7,9 @@
 	"require": {
 		"laravel/framework": "4.2.*"
 	},
+	"require-dev": {
+    "fzaninotto/faker": "1.5.*@dev"
+  },
 	"autoload": {
 		"classmap": [
 			"app/commands",

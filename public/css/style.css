@@ -1,4 +1,14 @@
 /**
+ * Header
+ */
+
+.navbar-inverse .navbar-brand {
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/**
  * Footer
  */
 

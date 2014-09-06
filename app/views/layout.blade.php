@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>@yield('title') | Recipe Tracker | Your First Web App</title>
-  <?php echo View::make('partials.shim') ?>
+
+  {{ View::make('partials.shim') }}
 
   {{ HTML::style('css/bootstrap.css') }}
   {{ HTML::style('css/style.css') }}
@@ -12,13 +13,13 @@
 </head>
 <body>
 
-  <?php echo View::make('partials.header') ?>
+  {{ View::make('partials.header') }}
 
   <div class="container">
 
     @yield('content')
 
-    <?php echo View::make('partials.footer') ?>
+    {{ View::make('partials.footer') }}
 
   </div>
 

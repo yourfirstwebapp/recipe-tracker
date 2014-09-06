@@ -6,10 +6,10 @@
   </small>
   <nav>
     <ul>
-      <li><a href="<?php
-        echo URL::action('PageController@about'); ?>">About</a></li>
-      <li><a href="<?php
-        echo URL::action('PageController@contact'); ?>">Contact</a></li>
+      <li><a href="{{ URL::action('PageController@about') }}">
+        About</a></li>
+      <li><a href="{{ URL::action('PageController@contact') }}">
+        Contact</a></li>
     </ul>
   </nav>
 </footer>

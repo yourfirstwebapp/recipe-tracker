@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php echo URL::action('PageController@index'); ?>">
+      <a class="navbar-brand" href="{{ URL::action('PageController@index') }}">
         Recipe Tracker</a>
     </div>
 
@@ -17,15 +17,15 @@
     <div class="collapse navbar-collapse" id="main_navigation">
       <ul class="nav navbar-nav navbar-right">
         <li {{ Request::is('/') ? 'class="active"' : '' }}>
-          <a href="<?php echo URL::action('PageController@index'); ?>">
+          <a href="{{ URL::action('PageController@index') }}">
             Home</a>
         </li>
         <li {{ Request::is('about') ? 'class="active"' : '' }}>
-          <a href="<?php echo URL::action('PageController@about'); ?>">
+          <a href="{{ URL::action('PageController@about') }}">
             About</a>
         </li>
         <li {{ Request::is('contact') ? 'class="active"' : '' }}>
-          <a href="<?php echo URL::action('PageController@contact'); ?>">
+          <a href="{{ URL::action('PageController@contact') }}">
             Contact</a>
         </li>
       </ul>

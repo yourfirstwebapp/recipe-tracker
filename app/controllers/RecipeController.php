@@ -9,7 +9,9 @@ class RecipeController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('recipe.index');
+		$data = array();
+    $data['recipes'] = Recipe::all();
+    return View::make('recipe.index', $data);
 	}
 
 

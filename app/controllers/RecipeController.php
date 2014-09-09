@@ -22,7 +22,9 @@ class RecipeController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$data = array();
+		$data['authors'] = ['' => ''] + Author::lists('name', 'id');
+		return View::make('recipe.create', $data);
 	}
 
 

@@ -31,3 +31,22 @@
       margin: 0 0 0 1em;
       padding: 0;
     }
+
+/**
+ * Create Recipe page
+ */
+
+.form-time > label {
+  display: block;
+}
+.form-time select {
+  float: left;
+  margin-right: 10px;
+  width: 60px;
+}
+.form-time .select-label {
+  float: left;
+  font-weight: normal;
+  margin-top: 7px;
+  margin-right: 10px;
+}

@@ -13,33 +13,34 @@
     ) }}
 
     {{ ControlGroup::generate(
-      Form::label('author', 'Author'),
-      Form::select('author', $authors)
+      Form::label('author_id', 'Author'),
+      Form::select('author_id', $authors)
     ) }}
 
     {{ ControlGroup::generate(
-      Form::label('time_prep', 'Prep Time'),
-      '<div class="row">'
-        . '<div class="col-xs-6">'
-        . InputGroup::withContents(Form::selectRange('time_prep_hours', 0, 24))->append('hrs')
-        . '</div>'
-        . '<div class="col-xs-6">'
-        . InputGroup::withContents(Form::selectRange('time_prep_minutes', 0, 60))->append('mins')
-        . '</div>'
-      . '</div>'
+      Form::label('servings', 'Servings'),
+      Form::selectRange('Servings', 1, 100)
     ) }}
 
-    {{ ControlGroup::generate(
-      Form::label('time_cook', 'Cook Time'),
-      '<div class="row">'
-        . '<div class="col-xs-6">'
-        . InputGroup::withContents(Form::selectRange('time_cook_hours', 0, 24))->append('hrs')
-        . '</div>'
-        . '<div class="col-xs-6">'
-        . InputGroup::withContents(Form::selectRange('time_cook_minutes', 0, 60))->append('mins')
-        . '</div>'
-      . '</div>'
-    ) }}
+    <div class="form-group form-time clearfix">
+      {{ Form::label('time_prep', 'Prep Time') }}
+      {{ Form::selectRange('time_prep_hours', 0, 24) }}
+      {{ Form::label('time_prep_hours', 'hrs',
+        [ 'class' => 'select-label' ]) }}
+      {{ Form::selectRange('time_prep_minutes', 0, 60) }}
+      {{ Form::label('time_prep_minutes', 'mins',
+        [ 'class' => 'select-label' ]) }}
+    </div>
+
+    <div class="form-group form-time clearfix">
+      {{ Form::label('time_cook', 'Cook Time') }}
+      {{ Form::selectRange('time_cook_hours', 0, 24) }}
+      {{ Form::label('time_cook_hours', 'hrs',
+        [ 'class' => 'select-label' ]) }}
+      {{ Form::selectRange('time_cook_minutes', 0, 60) }}
+      {{ Form::label('time_cook_minutes', 'mins',
+        [ 'class' => 'select-label' ]) }}
+    </div>
 
     {{ Form::submit('Create', [ 'class' => 'btn btn-primary' ]) }}
 

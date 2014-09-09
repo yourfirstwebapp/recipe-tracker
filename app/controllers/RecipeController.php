@@ -10,7 +10,9 @@ class RecipeController extends \BaseController {
 	public function index()
 	{
 		$data = array();
-    $data['recipes'] = Recipe::all();
+    $recipes = Recipe::all();
+    $recipes->load('author');
+    $data['recipes'] = $recipes;
     return View::make('recipe.index', $data);
 	}
 
@@ -35,7 +37,12 @@ class RecipeController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		// Retrieve all submitted form input values
+		$input = Input::all();
+
+    // Create a new recipe using the
+    // user-submitted input data
+		Recipe::create( $input );
 	}
 
 

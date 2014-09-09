@@ -43,6 +43,11 @@ class RecipeController extends \BaseController {
     // Create a new recipe using the
     // user-submitted input data
 		Recipe::create( $input );
+
+		// Redirect back to index after creating
+		// and display success message
+		return Redirect::route('recipe.index')
+			->with('message', Alert::success('Recipe created!'));
 	}
 
 

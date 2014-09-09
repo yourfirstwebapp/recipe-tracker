@@ -17,6 +17,8 @@
 
   <div class="container">
 
+    {{ View::make('partials.message') }}
+
     @yield('content')
 
     {{ View::make('partials.footer') }}

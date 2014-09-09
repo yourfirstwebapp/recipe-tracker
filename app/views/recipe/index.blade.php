@@ -3,7 +3,12 @@
 @section('title', 'Recipes')
 
 @section('content')
-  <h1>Recipes</h1>
+  <div class="page-header">
+    <a href="{{ URL::route('recipe.create') }}"
+      class="btn btn-success">+ Recipe</a>
+    <h1>Recipes</h1>
+  </div>
+
   <div class="list-group">
   @foreach($recipes as $recipe)
     <a class="list-group-item"

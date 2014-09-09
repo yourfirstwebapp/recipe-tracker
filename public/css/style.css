@@ -50,3 +50,12 @@
   margin-top: 7px;
   margin-right: 10px;
 }
+
+/**
+ * Recipe index page
+ */
+
+.page-header .btn {
+  float: right;
+  margin-top: 3px;
+}

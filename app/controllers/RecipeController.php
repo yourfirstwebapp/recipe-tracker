@@ -10,7 +10,7 @@ class RecipeController extends \BaseController {
 	public function index()
 	{
 		$data = array();
-    $recipes = Recipe::all();
+    $recipes = Recipe::recent()->get();
     $recipes->load('author');
     $data['recipes'] = $recipes;
     return View::make('recipe.index', $data);

@@ -2,9 +2,21 @@
 
 class Recipe extends Eloquent {
 
+  //
+  // Basic:
+
+  // Database table name
   protected $table = 'recipes';
 
-  protected $guarded = array('id');
+  // Fields allowed to be mass-assigned
+  protected $fillable = array(
+    'author_id',
+    'name',
+    'image',
+    'servings',
+    'time_prep',
+    'time_cook',
+  );
 
   // Called when a new model is created
   public static function boot()
@@ -14,6 +26,18 @@ class Recipe extends Eloquent {
     // Setup event bindings...
     Recipe::observe(new RecipeObserver);
   }
+
+  //
+  // Scopes:
+
+  // Retrieve newest recipes first
+  public function scopeRecent($query)
+  {
+    return $query->orderBy('created_at', 'desc');
+  }
+
+  //
+  // Relationships:
 
   public function author()
   {

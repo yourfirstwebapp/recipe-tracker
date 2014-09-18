@@ -1,6 +1,6 @@
 <?php
 
-class Recipe extends Eloquent {
+class Recipe extends Ardent {
 
   //
   // Basic:
@@ -18,13 +18,50 @@ class Recipe extends Eloquent {
     'time_cook',
   );
 
-  // Called when a new model is created
-  public static function boot()
-  {
-    parent::boot();
+  // Validation rules
+  public static $rules = array(
+    'name' => 'required',
+    'author_id' => 'required',
+    'servings' => 'required',
+    'time_prep' => 'required',
+    'time_cook' => 'required',
+  );
+  public static $customMessages = array(
+    'author_id.required' => 'The author field is required.',
+  );
 
-    // Setup event bindings...
-    Recipe::observe(new RecipeObserver);
+
+  //
+  // Hooks:
+
+  // (used to be prepareData)
+  public function beforeValidate() {
+    // If prep & cook times are set in hours & minutes,
+    // before saving the recipe entry...
+
+    if (isset($this->time_prep_hours)
+      && isset($this->time_prep_minutes)) {
+      // 1. Convert them to the HH:MM:SS that
+      //    the database recognizes
+      $this->time_prep =
+        $this->time_prep_hours . ':' .
+        $this->time_prep_minutes . ':00';
+
+      // 2. Clear out the hours and minutes values
+      //    (as they don't exist in the database)
+      unset($this->time_prep_hours);
+      unset($this->time_prep_minutes);
+    }
+
+    // Do the same for cook time
+    if (isset($this->time_cook_hours)
+      && isset($this->time_cook_minutes)) {
+      $this->time_cook =
+        $this->time_cook_hours . ':' .
+        $this->time_cook_minutes . ':00';
+      unset($this->time_cook_hours);
+      unset($this->time_cook_minutes);
+    }
   }
 
   //
@@ -52,40 +89,6 @@ class Recipe extends Eloquent {
   public function steps()
   {
     return $this->hasMany('Steps');
-  }
-
-}
-
-class RecipeObserver {
-
-  public function saving($recipe)
-  {
-    // If prep & cook times are set in hours & minutes,
-    // before saving the recipe entry...
-
-    if (isset($recipe->time_prep_hours)
-      && isset($recipe->time_prep_minutes)) {
-      // 1. Convert them to the HH:MM:SS that
-      //    the database recognizes
-      $recipe->time_prep =
-        $recipe->time_prep_hours . ':' .
-        $recipe->time_prep_minutes . ':00';
-
-      // 2. Clear out the hours and minutes values
-      //    (as they don't exist in the database)
-      unset($recipe->time_prep_hours);
-      unset($recipe->time_prep_minutes);
-    }
-
-    // Do the same for cook time
-    if (isset($recipe->time_cook_hours)
-      && isset($recipe->time_cook_minutes)) {
-      $recipe->time_cook =
-        $recipe->time_cook_hours . ':' .
-        $recipe->time_cook_minutes . ':00';
-      unset($recipe->time_cook_hours);
-      unset($recipe->time_cook_minutes);
-    }
   }
 
 }

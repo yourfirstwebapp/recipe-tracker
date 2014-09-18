@@ -6,7 +6,8 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"patricktalmadge/bootstrapper": "~5"
+		"patricktalmadge/bootstrapper": "~5",
+		"laravelbook/ardent": "2.4.2"
 	},
 	"require-dev": {
     "fzaninotto/faker": "1.5.*@dev"

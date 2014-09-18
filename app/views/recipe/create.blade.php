@@ -19,7 +19,7 @@
 
     {{ ControlGroup::generate(
       Form::label('servings', 'Servings'),
-      Form::selectRange('Servings', 1, 100)
+      Form::selectRange('servings', 1, 100)
     ) }}
 
     <div class="form-group form-time clearfix">

@@ -37,17 +37,35 @@ class RecipeController extends \BaseController {
 	 */
 	public function store()
 	{
-		// Retrieve all submitted form input values
-		$input = Input::all();
+		// Create a new recipe using the
+		// user-submitted input data
+		$recipe = new Recipe;
+		$recipe->name = Input::get('name');
+		$recipe->author_id = Input::get('author_id');
+		$recipe->servings = Input::get('servings');
+		$recipe->time_prep_hours = Input::get('time_prep_hours');
+		$recipe->time_prep_minutes = Input::get('time_prep_minutes');
+		$recipe->time_cook_hours = Input::get('time_cook_hours');
+		$recipe->time_cook_minutes = Input::get('time_cook_minutes');
 
-    // Create a new recipe using the
-    // user-submitted input data
-		Recipe::create( $input );
+		// Save the recipe entry into the database
+		// - will return false if the the model is invalid
+		$success = $recipe->save();
 
-		// Redirect back to index after creating
-		// and display success message
-		return Redirect::route('recipe.index')
-			->with('message', Alert::success('Recipe created!'));
+		// Take the proper course of action based on
+		// whether or not the recipe was created successfully
+		if ($success) {
+			// Redirect back to index after creating
+			// and display success message
+			return Redirect::route('recipe.index')
+				->with('message', Alert::success('Recipe created!'));
+		}
+		else {
+			// Redirect back to the create page
+			// and display the error messages
+			return Redirect::route('recipe.create')
+				->with('errors', $recipe->errors());
+		}
 	}
 
 

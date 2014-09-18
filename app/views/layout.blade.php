@@ -18,6 +18,7 @@
   <div class="container">
 
     {{ View::make('partials.message') }}
+    {{ View::make('partials.errors') }}
 
     @yield('content')
 

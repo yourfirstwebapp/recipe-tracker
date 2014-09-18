@@ -216,6 +216,8 @@ return array(
     'Table' => 'Bootstrapper\Facades\Table',
     'Thumbnail' => 'Bootstrapper\Facades\Thumbnail',
 
+    'Ardent' => 'LaravelBook\Ardent\Ardent',
+
 	),
 
 );

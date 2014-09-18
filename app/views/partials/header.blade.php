@@ -16,6 +16,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="main_navigation">
       <ul class="nav navbar-nav navbar-right">
+        <li {{ Request::is('recipe') ? 'class="active"' : '' }}>
+          <a href="{{ URL::route('recipe.index') }}">
+            Recipes</a>
+        </li>
         <li {{ Request::is('/') ? 'class="active"' : '' }}>
           <a href="{{ URL::action('PageController@index') }}">
             Home</a>

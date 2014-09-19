@@ -5,8 +5,9 @@
 @section('content')
 
   <h1>{{ $recipe->name }}</h1>
+  <p>by {{ $recipe->author->name }}</p>
 
-  <div class="row recipe-quick-facts">
+  <div class="row">
     <div class="col-md-4">
       <h4>Servings</h4>
       {{ $recipe->servings }}
@@ -21,20 +22,10 @@
     </div>
   </div>
 
-  <div class="recipe-ingredients">
+  {{ View::make('recipe.partials.ingredients',
+    array('ingredients' => $recipe->ingredients)) }}
 
-    <h2>Ingredients</h2>
-
-    <p>Ingredients will go here...</p>
-
-  </div><!-- /.recipe-ingredients -->
-
-  <div class="recipe-steps">
-
-    <h2>Steps</h2>
-
-    <p>Steps will go here...</p>
-
-  </div><!-- /.recipe-steps -->
+  {{ View::make('recipe.partials.steps',
+    array('steps' => $recipe->steps)) }}
 
 @stop

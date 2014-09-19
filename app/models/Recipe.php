@@ -88,7 +88,7 @@ class Recipe extends Ardent {
 
   public function steps()
   {
-    return $this->hasMany('Steps');
+    return $this->hasMany('Step');
   }
 
 

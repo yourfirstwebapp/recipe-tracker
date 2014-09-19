@@ -77,9 +77,10 @@ class RecipeController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$data = array();
 		$recipe = Recipe::findOrFail($id);
+		$recipe->load('author', 'ingredients', 'steps');
 
+		$data = array();
 		$data['recipe'] = $recipe;
 		return View::make('recipe.show', $data);
 	}

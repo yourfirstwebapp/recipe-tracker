@@ -23,15 +23,9 @@
   </div>
 
   {{ View::make('recipe.partials.ingredients',
-    array('ingredients' => $recipe->ingredients)) }}
-
-  {{ View::make('recipe.partials.ingredient_form',
     array('recipe' => $recipe)) }}
 
   {{ View::make('recipe.partials.steps',
-    array('steps' => $recipe->steps)) }}
-
-  {{ View::make('recipe.partials.step_form',
     array('recipe' => $recipe)) }}
 
 @stop

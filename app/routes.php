@@ -17,6 +17,10 @@
 // });
 
 
+// CSRF protection for all POST submissions
+Route::when('*', 'csrf', array('post', 'delete', 'put', 'patch'));
+
+
 //
 // Static pages:
 

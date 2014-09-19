@@ -64,11 +64,11 @@
  * Single recipe page
  */
 
-/* Add recipe item form */
+/* Recipe item form */
 
-.add-recipe-item-form {
+.recipe-item-form {
   display: none;
 }
-  .add-recipe-item-form .col-xs-2 .btn {
+  .recipe-item-form .col-xs-2 .btn {
     margin-top: 1.8em;
   }

@@ -1,12 +1,15 @@
-<div class="recipe-steps">
+<div class="recipe-item-container">
 
   <h2>Steps</h2>
 
-  <ul id="steps" class="list-group">
-  @foreach ($steps as $step)
+  <ul class="list-group">
+  @foreach ($recipe->steps as $step)
     {{ View::make('recipe.partials.step',
       array('step' => $step)) }}
   @endforeach
   </ul>
+
+  {{ View::make('recipe.partials.step_form',
+    array('recipe' => $recipe)) }}
 
 </div>

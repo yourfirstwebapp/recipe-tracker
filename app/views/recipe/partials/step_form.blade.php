@@ -1,23 +1,26 @@
-<div id="add_step_errors"></div>
+<div class="recipe-item-form-container">
 
-<div id="add_step_form" class="add-recipe-item-form">
+  <div class="recipe-item-form-errors"></div>
 
-{{ Form::open(array('route' => 'step.store')) }}
+  {{ Form::open(array(
+      'route' => 'step.store',
+      'class' => 'recipe-item-form'
+    )) }}
 
-  {{ Form::hidden('recipe_id', $recipe->id) }}
+    {{ Form::hidden('recipe_id', $recipe->id) }}
 
-  <div class="form-group">
-    {{ Form::label('instructions', 'Instructions') }}
-    {{ Form::textarea('instructions', null,
-      array('class' => 'form-control', 'placeholder' => 'e.g. Next, mix the flour and ...')) }}
-  </div>
-  <div class="form-group">
-    {{ Form::button('Add',
-      array('type' => 'submit', 'class' => 'btn btn-success')) }}
-  </div>
+    <div class="form-group">
+      {{ Form::label('instructions', 'Instructions') }}
+      {{ Form::textarea('instructions', null,
+        array('class' => 'form-control', 'placeholder' => 'e.g. Next, mix the flour and ...')) }}
+    </div>
+    <div class="form-group">
+      {{ Form::button('Add',
+        array('type' => 'submit', 'class' => 'btn btn-success')) }}
+    </div>
 
-{{ Form::close() }}
+  {{ Form::close() }}
+
+  <p><a class="toggle-recipe-item-form" href="#">+ Add step</a></p>
 
 </div>
-
-<p><a id="show_add_step" href="#">+ Add step</a></p>

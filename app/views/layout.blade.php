@@ -10,6 +10,7 @@
   {{ HTML::style('css/style.css') }}
   {{ HTML::script('js/jquery-latest.min.js') }}
   {{ HTML::script('js/bootstrap.min.js') }}
+  {{ HTML::script('js/script.js') }}
 </head>
 <body>
 

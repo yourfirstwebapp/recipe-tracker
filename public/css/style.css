@@ -59,3 +59,16 @@
   float: right;
   margin-top: 3px;
 }
+
+/**
+ * Single recipe page
+ */
+
+/* Add recipe item form */
+
+.add-recipe-item-form {
+  display: none;
+}
+  .add-recipe-item-form .col-xs-2 .btn {
+    margin-top: 1.8em;
+  }

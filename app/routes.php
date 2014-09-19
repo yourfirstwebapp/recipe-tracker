@@ -28,3 +28,15 @@ Route::get('/contact', 'PageController@contact');
 // Recipe resource route:
 
 Route::resource('recipe', 'RecipeController');
+
+//
+// Ingredient resource route:
+
+Route::resource('ingredient', 'IngredientController',
+  array('only' => array('store', 'destroy')));
+
+//
+// Step resource route:
+
+Route::resource('step', 'StepController',
+  array('only' => array('store', 'destroy')));

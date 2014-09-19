@@ -91,4 +91,42 @@ class Recipe extends Ardent {
     return $this->hasMany('Steps');
   }
 
+
+  //
+  // Accessors:
+
+  public function getTimePrepDisplayAttribute()
+  {
+    $display_time = $this->getDisplayTime( $this->time_prep );
+    return $display_time;
+  }
+
+  public function getTimeCookDisplayAttribute()
+  {
+    $display_time = $this->getDisplayTime( $this->time_cook );
+    return $display_time;
+  }
+
+
+  //
+  // Private:
+
+  private function getDisplayTime($time) {
+    $display_time = '';
+
+    if (!empty($time)) {
+      $timestamp = strtotime($time);
+
+      if (date('G', $timestamp) > 0) {
+        $display_time .= date('G', $timestamp) . ' hrs ';
+      }
+      if (date('i', $timestamp) > 0) {
+        $display_time .= intval(date('i', $timestamp)) . ' mins';
+      }
+
+    }
+
+    return $display_time;
+  }
+
 }

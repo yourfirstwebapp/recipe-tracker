@@ -2,7 +2,8 @@
 
   <h2>Steps</h2>
 
-  <ul class="list-group">
+  <ul class="list-group recipe-item-list"
+    data-update-orders-url="{{ URL::action('StepController@updateOrders') }}">
   @foreach ($recipe->steps as $step)
     {{ View::make('recipe.partials.step',
       array('step' => $step)) }}

@@ -36,11 +36,13 @@ Route::resource('recipe', 'RecipeController');
 //
 // Ingredient resource route:
 
+Route::post('ingredient/update_orders', 'IngredientController@updateOrders');
 Route::resource('ingredient', 'IngredientController',
   array('only' => array('store', 'destroy')));
 
 //
 // Step resource route:
 
+Route::post('step/update_orders', 'StepController@updateOrders');
 Route::resource('step', 'StepController',
   array('only' => array('store', 'destroy')));

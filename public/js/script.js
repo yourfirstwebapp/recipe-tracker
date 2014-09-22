@@ -1,3 +1,13 @@
+
+// Send the CSRF token (from the csrf-token meta tag)
+// along with all with Ajax requests, automatically
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+
 $(document).ready(function() {
 
   /**
@@ -86,6 +96,41 @@ $(document).ready(function() {
       'json'
     );
 
+  });
+
+
+  /**
+   * Reordering ingredients / steps
+   */
+
+  // Make the ingredient and step list items sortable
+  $('.recipe-item-list').sortable({
+    stop: function(e, ui) {
+      // Access the dragged item via ui object
+      // supplied by jQuery UI
+      var $draggedItem = ui.item;
+
+      var $itemList = $draggedItem.closest('.list-group');
+
+      // Get an array (converted to a string) of the
+      // items' ids, using the sortable toArray() function
+      var itemIdArray = $itemList.sortable('toArray',
+        { attribute: 'data-id' });
+
+      var controllerActionURL = $itemList.attr('data-update-orders-url');
+      var submitData = {
+        ids: itemIdArray
+      };
+
+      $.post(
+        controllerActionURL,
+        submitData,
+        function(json) {
+          // Nothing to do here...
+        },
+        'json'
+      );
+    }
   });
 
 });

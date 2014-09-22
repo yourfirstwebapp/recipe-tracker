@@ -58,4 +58,29 @@ class StepController extends \BaseController {
   }
 
 
+  /**
+   * Update order values of multiple items
+   *
+   * @return Response
+   */
+  public function updateOrders() {
+    // Get the array of item ids
+    $ids = Input::get('ids');
+
+    // Keep track of the current order
+    $order = 1;
+    foreach ($ids as $id) {
+      // Update the item with the designated/current order
+      Ingredient::where('id', $id)
+        ->update(array('order' => $order));
+
+      // Increment the order counter
+      $order++;
+    }
+
+    $response = array('status' => 'success');
+    return Response::json($response);
+  }
+
+
 }

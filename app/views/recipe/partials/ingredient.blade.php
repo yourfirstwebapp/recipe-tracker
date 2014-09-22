@@ -1,4 +1,5 @@
-<li class="list-group-item">
+<li class="list-group-item"
+  data-id="{{ $ingredient->id }}">
   {{ Form::open(array(
     'route' => array('ingredient.destroy', $ingredient->id),
     'method' => 'delete',

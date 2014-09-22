@@ -71,7 +71,7 @@ class StepController extends \BaseController {
     $order = 1;
     foreach ($ids as $id) {
       // Update the item with the designated/current order
-      Ingredient::where('id', $id)
+      Step::where('id', $id)
         ->update(array('order' => $order));
 
       // Increment the order counter

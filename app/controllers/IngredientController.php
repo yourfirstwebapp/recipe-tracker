@@ -61,7 +61,11 @@ class IngredientController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$ingredient = Ingredient::find($id);
+		$ingredient->delete();
+
+		$response = array('status' => 'success');
+		return Response::json($response);
 	}
 
 

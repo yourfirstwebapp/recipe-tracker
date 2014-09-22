@@ -72,3 +72,12 @@
   .recipe-item-form .col-xs-2 .btn {
     margin-top: 1.8em;
   }
+
+/* Recipe ingredients & steps */
+
+.list-group-item .delete-recipe-item {
+  display: none;
+}
+  .list-group-item:hover .delete-recipe-item {
+    display: block;
+  }

@@ -62,4 +62,30 @@ $(document).ready(function() {
 
   });
 
+
+  /**
+   * Delete recipe items
+   */
+
+  $('.delete-recipe-item-form').submit(function(e) {
+    e.preventDefault();
+
+    var $form = $(this);
+    var formURL = $form.attr('action');
+    var formData = $form.serialize();
+    var $item = $form.closest('.list-group-item');
+
+    $.post(
+      formURL,
+      formData,
+      function(json) {
+        $item.fadeOut(function() {
+          $item.remove();
+        });
+      },
+      'json'
+    );
+
+  });
+
 });

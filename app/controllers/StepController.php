@@ -49,9 +49,13 @@ class StepController extends \BaseController {
 	 * @return Response
 	 */
 	public function destroy($id)
-	{
-		//
-	}
+  {
+    $step = Step::find($id);
+    $step->delete();
+
+    $response = array('status' => 'success');
+		return Response::json($response);
+  }
 
 
 }

@@ -64,14 +64,11 @@
  * Single recipe page
  */
 
-/* Recipe item form */
+/* Recipe forms */
 
-.recipe-item-form {
-  display: none;
+.recipe-form .col-xs-2 .btn {
+  margin-top: 1.8em;
 }
-  .recipe-item-form .col-xs-2 .btn {
-    margin-top: 1.8em;
-  }
 
 /* Recipe ingredients & steps */
 
@@ -80,4 +77,13 @@
 }
   .list-group-item:hover .delete-recipe-item {
     display: block;
+  }
+
+/* Recipe image */
+
+.recipe-image {
+  margin-bottom: 1em;
+}
+  .recipe-image img {
+    max-width: 100%;
   }

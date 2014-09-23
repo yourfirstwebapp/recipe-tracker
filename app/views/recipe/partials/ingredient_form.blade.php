@@ -1,10 +1,10 @@
-<div class="recipe-item-form-container">
+<div class="recipe-form-container">
 
   <div class="recipe-item-form-errors"></div>
 
   {{ Form::open(array(
       'route' => 'ingredient.store',
-      'class' => 'recipe-item-form'
+      'class' => 'recipe-form recipe-item-form hide'
     )) }}
 
     {{ Form::hidden('recipe_id', $recipe->id) }}
@@ -33,6 +33,6 @@
 
   {{ Form::close() }}
 
-  <p><a class="toggle-recipe-item-form" href="#">+ Add ingredient</a></p>
+  <p><a class="toggle-recipe-form" href="#">+ Add ingredient</a></p>
 
 </div>

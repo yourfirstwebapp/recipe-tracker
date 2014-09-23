@@ -25,7 +25,8 @@ class RecipeTableSeeder extends Seeder {
       for ($i = 0; $i < $num_to_create; $i++) {
         $recipe_id = DB::table('recipes')->insertGetId(array(
           'name' => $faker->text(20),
-          'image' => $faker->image('tmp', 1200, 300),
+          'image' => str_replace('public/', '',
+            $faker->image('public/uploads', 1200, 300)),
           'author_id' => $author_id,
           'servings' => $faker->randomDigitNotNull,
           'time_prep' => $faker->time,

@@ -11,15 +11,20 @@ $.ajaxSetup({
 $(document).ready(function() {
 
   /**
-   * Add recipe items
+   * Recipe forms
    */
 
-  $('.toggle-recipe-item-form').click(function(e) {
+  $('.toggle-recipe-form').click(function(e) {
     e.preventDefault();
-    var $form = $(this).closest('.recipe-item-form-container')
+    var $form = $(this).closest('.recipe-form-container')
       .find('form');
-    $form.toggle();
+    $form.toggleClass('hide');
   });
+
+
+  /**
+   * Add recipe items
+   */
 
   $('.recipe-item-form').submit(function(e) {
     e.preventDefault();
@@ -107,10 +112,12 @@ $(document).ready(function() {
   $('.recipe-item-list').sortable({
     stop: function(e, ui) {
       // Access the dragged item via ui object
-      // supplied by jQuery UI
+      // supplied by jQuery UI & its parent list
       var $draggedItem = ui.item;
-
       var $itemList = $draggedItem.closest('.list-group');
+
+      // Remove any previous alerts
+      $itemList.next('.alert').remove();
 
       // Get an array (converted to a string) of the
       // items' ids, using the sortable toArray() function
@@ -126,7 +133,16 @@ $(document).ready(function() {
         controllerActionURL,
         submitData,
         function(json) {
-          // Nothing to do here...
+          // Show a success message
+          var $message = $('<div class="alert alert-success">'
+            + 'Updated order saved.'
+            + '</div>');
+          $message.insertAfter($itemList);
+
+          // Hide the message after 3 seconds
+          var removeMessage = setTimeout(function() {
+            $message.fadeOut();
+          }, 3000);
         },
         'json'
       );

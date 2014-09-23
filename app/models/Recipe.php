@@ -83,12 +83,14 @@ class Recipe extends Ardent {
 
   public function ingredients()
   {
-    return $this->hasMany('Ingredient');
+    return $this->hasMany('Ingredient')
+      ->orderBy('order');
   }
 
   public function steps()
   {
-    return $this->hasMany('Step');
+    return $this->hasMany('Step')
+      ->orderBy('order');
   }
 
 

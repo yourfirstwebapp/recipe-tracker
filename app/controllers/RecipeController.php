@@ -106,7 +106,28 @@ class RecipeController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		if (Input::hasFile('image')) {
+			// Get the recipe from the database
+			$recipe = Recipe::find($id);
+
+			// Set the image, and check if it's valid
+			$recipe->image = Input::file('image');
+			$success = $recipe->save();
+
+			// Redirect and show the appropriate message
+			if ($success) {
+				return Redirect::route('recipe.show', array('id' => $id))
+					->with('message', Alert::success('Recipe image updated.'));
+			}
+			else {
+				return Redirect::route('recipe.show', array('id' => $id))
+					->with('errors', $recipe->errors());
+			}
+		}
+
+		// Noting to update...
+		// just go back to the recipe's page
+		return Redirect::route('recipe.show', array('id' => $id));
 	}
 
 

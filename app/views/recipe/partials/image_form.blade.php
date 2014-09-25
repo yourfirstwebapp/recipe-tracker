@@ -2,6 +2,7 @@
 
   {{ Form::open(array(
       'route' => array('recipe.update', $recipe->id),
+      'method' => 'PUT',
       'files' => true,
       'class' => 'recipe-form hide'
     )) }}

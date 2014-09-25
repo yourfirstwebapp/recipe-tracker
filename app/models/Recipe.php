@@ -25,6 +25,7 @@ class Recipe extends Ardent {
     'servings' => 'required',
     'time_prep' => 'required',
     'time_cook' => 'required',
+    'image' => 'image',
   );
   public static $customMessages = array(
     'author_id.required' => 'The author field is required.',
@@ -63,6 +64,29 @@ class Recipe extends Ardent {
       unset($this->time_cook_minutes);
     }
   }
+
+  public function beforeSave() {
+    // If there's a new image, move it to
+    // the designated folder
+    if ($this->isDirty('image')) {
+      // Set the destination to our public/uploads folder
+      // and name to the following format:
+      // [id]_[timestamp].[extension]
+      $destinationFolder = 'uploads';
+      $destinationPath = public_path() . '/' . $destinationFolder;
+      $fileName = $this->id . '_' . time() . '.' . $this->image->getClientOriginalExtension();
+
+      // Upload the file and move it to the uploads folder
+      $this->image->move($destinationPath, $fileName);
+
+      // Set the new image file's path
+      $newPath = $destinationFolder . '/' . $fileName;
+
+      // Update the recipe's database entry
+      $this->image = $newPath;
+    }
+  }
+
 
   //
   // Scopes:

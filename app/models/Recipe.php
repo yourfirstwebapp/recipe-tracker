@@ -65,6 +65,7 @@ class Recipe extends Ardent {
     }
   }
 
+  // Run before a save is made to a database entry
   public function beforeSave() {
     // If there's a new image, move it to
     // the designated folder

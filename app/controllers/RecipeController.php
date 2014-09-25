@@ -58,7 +58,7 @@ class RecipeController extends \BaseController {
 			// Redirect back to index after creating
 			// and display success message
 			return Redirect::route('recipe.index')
-				->with('message', Alert::success('Recipe created!'));
+				->with('message', StatusMessage::success('Recipe created!'));
 		}
 		else {
 			// Redirect back to the create page
@@ -117,7 +117,7 @@ class RecipeController extends \BaseController {
 			// Redirect and show the appropriate message
 			if ($success) {
 				return Redirect::route('recipe.show', array('id' => $id))
-					->with('message', Alert::success('Recipe image updated.'));
+					->with('message', StatusMessage::success('Recipe image updated.'));
 			}
 			else {
 				return Redirect::route('recipe.show', array('id' => $id))

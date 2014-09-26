@@ -126,7 +126,8 @@ $(document).ready(function() {
 
       var controllerActionURL = $itemList.attr('data-update-orders-url');
       var submitData = {
-        ids: itemIdArray
+        ids: itemIdArray,
+        _method: 'put'
       };
 
       $.post(

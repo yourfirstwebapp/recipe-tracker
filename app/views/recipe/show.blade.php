@@ -4,7 +4,12 @@
 
 @section('content')
 
-  <h1>{{ $recipe->name }}</h1>
+  <div class="page-header">
+    <a class="btn btn-primary"
+      href="{{ URL::route('recipe.edit', $recipe->id) }}">
+      <i class="glyphicon glyphicon-edit"></i> Edit</a>
+    <h1>{{ $recipe->name }}</h1>
+  </div>
   <p>by {{ $recipe->author->name }}</p>
 
   {{ View::make('recipe.partials.image',

@@ -134,6 +134,40 @@ class Recipe extends Ardent {
     return $display_time;
   }
 
+  public function getTimePrepHoursAttribute()
+  {
+    return date('G', strtotime($this->time_prep));
+  }
+
+  public function getTimePrepMinutesAttribute()
+  {
+    return date('i', strtotime($this->time_prep));
+  }
+
+  public function getTimeCookHoursAttribute()
+  {
+    return date('G', strtotime($this->time_cook));
+  }
+
+  public function getTimeCookMinutesAttribute()
+  {
+    return date('i', strtotime($this->time_cook));
+  }
+
+
+  //
+  // Utility:
+
+  public function setInputData() {
+    $this->name = Input::get('name');
+    $this->author_id = Input::get('author_id');
+    $this->servings = Input::get('servings');
+    $this->time_prep_hours = Input::get('time_prep_hours');
+    $this->time_prep_minutes = Input::get('time_prep_minutes');
+    $this->time_cook_hours = Input::get('time_cook_hours');
+    $this->time_cook_minutes = Input::get('time_cook_minutes');
+  }
+
 
   //
   // Private:

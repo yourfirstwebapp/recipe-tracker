@@ -87,3 +87,10 @@
   .recipe-image img {
     max-width: 100%;
   }
+
+/* Heading button */
+
+h1 .btn {
+  float: right;
+  margin-top: 2px;
+}

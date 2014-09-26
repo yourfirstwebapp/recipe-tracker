@@ -40,13 +40,10 @@ class RecipeController extends \BaseController {
 		// Create a new recipe using the
 		// user-submitted input data
 		$recipe = new Recipe;
-		$recipe->name = Input::get('name');
-		$recipe->author_id = Input::get('author_id');
-		$recipe->servings = Input::get('servings');
-		$recipe->time_prep_hours = Input::get('time_prep_hours');
-		$recipe->time_prep_minutes = Input::get('time_prep_minutes');
-		$recipe->time_cook_hours = Input::get('time_cook_hours');
-		$recipe->time_cook_minutes = Input::get('time_cook_minutes');
+
+		// Set the recipe's data according
+	  // to user-inputted values
+		$recipe->setInputData();
 
 		// Save the recipe entry into the database
 		// - will return false if the the model is invalid
@@ -94,9 +91,13 @@ class RecipeController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
-	}
+		$recipe = Recipe::findOrFail($id);
 
+		$data = array();
+		$data['recipe'] = $recipe;
+		$data['authors'] = ['' => ''] + Author::lists('name', 'id');
+		return View::make('recipe.edit', $data);
+	}
 
 	/**
 	 * Update the specified resource in storage.
@@ -104,7 +105,35 @@ class RecipeController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id) {
+		$recipe = Recipe::findOrFail($id);
+
+		// Unset the recipe's image to bypass validation
+	  unset($recipe->image);
+
+	  // Set the recipe's data according
+	  // to user-inputted values
+		$recipe->setInputData();
+
+		$success = $recipe->save();
+
+		if ($success) {
+			return Redirect::route('recipe.index')
+				->with('message', StatusMessage::success('Recipe updated!'));
+		}
+		else {
+			return Redirect::route('recipe.edit', $id)
+				->with('errors', $recipe->errors());
+		}
+	}
+
+	/**
+	 * Update the specified recipe's image in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function updateImage($id)
 	{
 		if (Input::hasFile('image')) {
 			// Get the recipe from the database

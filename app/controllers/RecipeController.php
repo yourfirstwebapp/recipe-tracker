@@ -118,7 +118,7 @@ class RecipeController extends \BaseController {
 		$success = $recipe->save();
 
 		if ($success) {
-			return Redirect::route('recipe.index')
+			return Redirect::route('recipe.show', $id)
 				->with('message', StatusMessage::success('Recipe updated!'));
 		}
 		else {
@@ -168,7 +168,10 @@ class RecipeController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$recipe = Recipe::findOrFail($id);
+		$recipe->delete();
+		return Redirect::route('recipe.index')
+			->with('message', StatusMessage::info('Recipe deleted.'));
 	}
 
 

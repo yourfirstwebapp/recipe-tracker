@@ -12,8 +12,10 @@
     {{ View::make('recipe.partials.recipe_form',
       array('authors' => $authors))}}
 
-    {{ Form::submit('Create',
-      array('class' => 'btn btn-primary')) }}
+    <div class="form-group">
+      {{ Form::submit('Create',
+        array('class' => 'btn btn-primary')) }}
+    </div>
 
   {{ Form::close() }}
 @stop

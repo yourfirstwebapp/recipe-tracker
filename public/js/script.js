@@ -150,4 +150,31 @@ $(document).ready(function() {
     }
   });
 
+
+  /**
+   * Delete a recipe
+   */
+
+  $('.delete-recipe-form').submit(function(e) {
+    // NOT confirmed until the user confirms
+    // both confirm alert messages
+    var confirmed = false;
+    var firstMessage = 'Are you SURE you wish to delete this recipe?'
+      + ' All of its information will be lost.';
+    if (confirm(firstMessage)) {
+      // Confirm again...
+      var lastMessage = 'POSITIVE you want to delete it?'
+        + ' There\'s no turning back...';
+      if (confirm(lastMessage)) {
+        confirmed = true;
+      }
+    }
+
+    // If NOT confirmed, block
+    // the form submit (i.e. deletion)
+    if (!confirmed) {
+      return false;
+    }
+  });
+
 });

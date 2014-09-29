@@ -75,7 +75,8 @@ class Recipe extends Ardent {
       // [id]_[timestamp].[extension]
       $destinationFolder = 'uploads';
       $destinationPath = public_path() . '/' . $destinationFolder;
-      $fileName = $this->id . '_' . time() . '.' . $this->image->getClientOriginalExtension();
+      $fileName = $this->id . '_' . time()
+        . '.' . $this->image->getClientOriginalExtension();
 
       // Upload the file and move it to the uploads folder
       $this->image->move($destinationPath, $fileName);
@@ -86,6 +87,14 @@ class Recipe extends Ardent {
       // Update the recipe's database entry
       $this->image = $newPath;
     }
+  }
+
+  // Delete a recipe's related items
+  // (i.e. ingredients and steps), before deleting
+  // the recipe itself
+  public function beforeDelete() {
+    $this->ingredients()->delete();
+    $this->steps()->delete();
   }
 
 

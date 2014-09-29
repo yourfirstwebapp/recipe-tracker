@@ -10,14 +10,31 @@
   {{ Form::model($recipe,
     array(
       'route' => array('recipe.update', $recipe->id),
-      'method' => 'PUT',
+      'method' => 'put',
     )) }}
 
     {{ View::make('recipe.partials.recipe_form',
       array('authors' => $authors, 'recipe' => $recipe))}}
 
-    {{ Form::submit('Update',
-      array('class' => 'btn btn-primary')) }}
+    <div class="form-group">
+      {{ Form::submit('Update',
+        array('class' => 'btn btn-primary')) }}
+    </div>
 
   {{ Form::close() }}
+
+  {{ Form::model($recipe,
+    array(
+      'route' => array('recipe.destroy', $recipe->id),
+      'method' => 'delete',
+      'class' => 'delete-recipe-form'
+    )) }}
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-danger">
+        Delete Recipe</button>
+    </div>
+
+  {{ Form:: close() }}
+
 @stop

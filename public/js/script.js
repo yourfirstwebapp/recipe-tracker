@@ -53,9 +53,8 @@ $(document).ready(function() {
       formURL,
       formData,
       function(json) {
-        // Clear any previous errors
-        var $additemErrors = $itemContainer.find('.recipe-item-form-errors');
-        $additemErrors.empty();
+        // Remove any previous errors
+        $form.find('.alert').remove();
 
         // Act according to the status returned
         var status = json["status"];
@@ -69,7 +68,7 @@ $(document).ready(function() {
         }
         else if (status == "fail") {
           var errorsHTML = json["errors"];
-          $additemErrors.html(errorsHTML);
+          $form.prepend(errorsHTML);
         }
       },
       'json'
@@ -116,9 +115,6 @@ $(document).ready(function() {
       var $draggedItem = ui.item;
       var $itemList = $draggedItem.closest('.list-group');
 
-      // Remove any previous alerts
-      $itemList.next('.alert').remove();
-
       // Get an array (converted to a string) of the
       // items' ids, using the sortable toArray() function
       var itemIdArray = $itemList.sortable('toArray',
@@ -130,20 +126,19 @@ $(document).ready(function() {
         _method: 'put'
       };
 
+      // Make the Ajax request
       $.post(
         controllerActionURL,
         submitData,
         function(json) {
           // Show a success message
-          var $message = $('<div class="alert alert-success">'
-            + 'Updated order saved.'
-            + '</div>');
+          var $message = $(json.message);
           $message.insertAfter($itemList);
 
           // Hide the message after 3 seconds
           var removeMessage = setTimeout(function() {
             $message.fadeOut();
-          }, 3000);
+          }, 1500);
         },
         'json'
       );

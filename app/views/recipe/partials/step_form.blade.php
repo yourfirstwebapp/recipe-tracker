@@ -1,7 +1,5 @@
 <div class="recipe-form-container">
 
-  <div class="recipe-item-form-errors"></div>
-
   {{ Form::open(array(
       'route' => 'step.store',
       'class' => 'recipe-form recipe-item-form hide'

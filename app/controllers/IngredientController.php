@@ -89,7 +89,10 @@ class IngredientController extends \BaseController {
 			$order++;
 		}
 
-		$response = array('status' => 'success');
+		$response = array(
+			'status' => 'success',
+			'message' => StatusMessage::success('Updated order saved.')
+		);
 		return Response::json($response);
 	}
 

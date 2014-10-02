@@ -1,7 +1,7 @@
 <div class="recipe-form-container">
 
   {{ Form::open(array(
-      'route' => array('recipe.update_image', $recipe->id),
+      'action' => array('RecipeController@updateImage', $recipe->id),
       'method' => 'put',
       'files' => true,
       'class' => 'recipe-form hide'

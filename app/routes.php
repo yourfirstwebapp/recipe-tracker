@@ -31,11 +31,7 @@ Route::get('/contact', 'PageController@contact');
 //
 // Recipe resource route:
 
-Route::put('recipe/{id}/update_image',
-  array(
-    'as' => 'recipe.update_image',
-    'uses' => 'RecipeController@updateImage'
-  ));
+Route::put('recipe/{id}/update_image', 'RecipeController@updateImage');
 Route::resource('recipe', 'RecipeController');
 
 //

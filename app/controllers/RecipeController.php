@@ -135,7 +135,8 @@ class RecipeController extends \BaseController {
 	 */
 	public function updateImage($id)
 	{
-		if (Input::hasFile('image')) {
+		if (Input::hasFile('image'))
+		{
 			// Get the recipe from the database
 			$recipe = Recipe::find($id);
 

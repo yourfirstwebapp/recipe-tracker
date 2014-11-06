@@ -36,34 +36,34 @@ class Recipe extends Ardent {
   // Hooks:
 
   // (used to be prepareData)
-  public function beforeValidate() {
-    // If prep & cook times are set in hours & minutes,
-    // before saving the recipe entry...
+  // public function beforeValidate() {
+  //   // If prep & cook times are set in hours & minutes,
+  //   // before saving the recipe entry...
 
-    if (isset($this->time_prep_hours)
-      && isset($this->time_prep_minutes)) {
-      // 1. Convert them to the HH:MM:SS that
-      //    the database recognizes
-      $this->time_prep =
-        $this->time_prep_hours . ':' .
-        $this->time_prep_minutes . ':00';
+  //   if (isset($this->time_prep_hours)
+  //     && isset($this->time_prep_minutes)) {
+  //     // 1. Convert them to the HH:MM:SS that
+  //     //    the database recognizes
+  //     $this->time_prep =
+  //       $this->time_prep_hours . ':' .
+  //       $this->time_prep_minutes . ':00';
 
-      // 2. Clear out the hours and minutes values
-      //    (as they don't exist in the database)
-      unset($this->time_prep_hours);
-      unset($this->time_prep_minutes);
-    }
+  //     // 2. Clear out the hours and minutes values
+  //     //    (as they don't exist in the database)
+  //     unset($this->time_prep_hours);
+  //     unset($this->time_prep_minutes);
+  //   }
 
-    // Do the same for cook time
-    if (isset($this->time_cook_hours)
-      && isset($this->time_cook_minutes)) {
-      $this->time_cook =
-        $this->time_cook_hours . ':' .
-        $this->time_cook_minutes . ':00';
-      unset($this->time_cook_hours);
-      unset($this->time_cook_minutes);
-    }
-  }
+  //   // Do the same for cook time
+  //   if (isset($this->time_cook_hours)
+  //     && isset($this->time_cook_minutes)) {
+  //     $this->time_cook =
+  //       $this->time_cook_hours . ':' .
+  //       $this->time_cook_minutes . ':00';
+  //     unset($this->time_cook_hours);
+  //     unset($this->time_cook_minutes);
+  //   }
+  // }
 
   // Run before a save is made to a database entry
   public function beforeSave() {
@@ -171,10 +171,14 @@ class Recipe extends Ardent {
     $this->name = Input::get('name');
     $this->author_id = Input::get('author_id');
     $this->servings = Input::get('servings');
-    $this->time_prep_hours = Input::get('time_prep_hours');
-    $this->time_prep_minutes = Input::get('time_prep_minutes');
-    $this->time_cook_hours = Input::get('time_cook_hours');
-    $this->time_cook_minutes = Input::get('time_cook_minutes');
+    $this->time_prep =
+      Input::get('time_prep_hours')           // HH
+      . ':' . Input::get('time_prep_minutes') // :MM
+      . ':00';                                // :SS
+    $this->time_cook =
+      Input::get('time_cook_hours')           // HH
+      . ':' . Input::get('time_cook_minutes') // :MM
+      . ':00';                                // :SS
   }
 
 

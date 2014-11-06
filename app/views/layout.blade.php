@@ -5,11 +5,10 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title') | Recipe Tracker | Your First Web App</title>
 
-  {{ View::make('partials.shim') }}
-
   {{ HTML::style('css/bootstrap.css') }}
   {{ HTML::style('css/style.css') }}
   {{ HTML::script('js/jquery-1.11.1.min.js') }}
+  {{ HTML::script('js/bootstrap.min.js') }}
   {{ HTML::script('js/jquery-ui.min.js') }}
   {{ HTML::script('js/script.js') }}
 </head>

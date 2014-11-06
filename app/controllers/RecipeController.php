@@ -38,31 +38,53 @@ class RecipeController extends \BaseController {
 	public function store()
 	{
 		// Create a new recipe using the
-		// user-submitted input data
-		$recipe = new Recipe;
+    // user-submitted input data
+    $recipe = new Recipe;
+    $recipe->name = Input::get('name');
+    $recipe->author_id = Input::get('author_id');
+    $recipe->servings = Input::get('servings');
+    $recipe->time_prep =
+      Input::get('time_prep_hours')
+      . ':' . Input::get('time_prep_minutes')
+      . ':00';
+    $recipe->time_cook =
+      Input::get('time_cook_hours')
+      . ':' . Input::get('time_cook_minutes')
+      . ':00';
 
-		// Set the recipe's data according
-	  // to user-inputted values
-		$recipe->setInputData();
+    // Save the recipe entry into the database
+    $recipe->save();
 
-		// Save the recipe entry into the database
-		// - will return false if the the model is invalid
-		$success = $recipe->save();
+    return Redirect::route('recipe.index')
+      ->with('message',
+        '<div class="alert alert-success">Recipe created!</div>');
 
-		// Take the proper course of action based on
-		// whether or not the recipe was created successfully
-		if ($success) {
-			// Redirect back to index after creating
-			// and display success message
-			return Redirect::route('recipe.index')
-				->with('message', StatusMessage::success('Recipe created!'));
-		}
-		else {
-			// Redirect back to the create page
-			// and display the error messages
-			return Redirect::route('recipe.create')
-				->with('errors', $recipe->errors());
-		}
+		// // Create a new recipe using the
+		// // user-submitted input data
+		// $recipe = new Recipe;
+
+		// // Set the recipe's data according
+	 //  // to user-inputted values
+		// $recipe->setInputData();
+
+		// // Save the recipe entry into the database
+		// // - will return false if the the model is invalid
+		// $success = $recipe->save();
+
+		// // Take the proper course of action based on
+		// // whether or not the recipe was created successfully
+		// if ($success) {
+		// 	// Redirect back to index after creating
+		// 	// and display success message
+		// 	return Redirect::route('recipe.index')
+		// 		->with('message', StatusMessage::success('Recipe created!'));
+		// }
+		// else {
+		// 	// Redirect back to the create page
+		// 	// and display the error messages
+		// 	return Redirect::route('recipe.create')
+		// 		->with('errors', $recipe->errors());
+		// }
 	}
 
 

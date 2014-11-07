@@ -1,6 +1,6 @@
 <?php
 
-class Author extends Eloquent {
+class Author extends Ardent {
 
   protected $table = 'authors';
 

@@ -53,11 +53,19 @@ class RecipeController extends \BaseController {
       . ':00';
 
     // Save the recipe entry into the database
-    $recipe->save();
+    $success = $recipe->save();
 
-    return Redirect::route('recipe.index')
-      ->with('message',
-        '<div class="alert alert-success">Recipe created!</div>');
+    if ($success) {
+    	return Redirect::route('recipe.index')
+	      ->with('message',
+	        '<div class="alert alert-success">Recipe created!</div>');
+    }
+    else {
+	    // Redirect back to the create page
+	    // and display the error messages
+	    return Redirect::route('recipe.create')
+	      ->with('errors', $recipe->errors());
+	  }
 
 		// // Create a new recipe using the
 		// // user-submitted input data

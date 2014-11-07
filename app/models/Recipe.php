@@ -8,15 +8,15 @@ class Recipe extends Ardent {
   // Database table name
   protected $table = 'recipes';
 
-  // Fields allowed to be mass-assigned
-  protected $fillable = array(
-    'author_id',
-    'name',
-    'image',
-    'servings',
-    'time_prep',
-    'time_cook',
-  );
+  // // Fields allowed to be mass-assigned
+  // protected $fillable = array(
+  //   'author_id',
+  //   'name',
+  //   'image',
+  //   'servings',
+  //   'time_prep',
+  //   'time_cook',
+  // );
 
   // Validation rules
   public static $rules = array(

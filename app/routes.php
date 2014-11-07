@@ -35,6 +35,11 @@ Route::put('recipe/{id}/update_image', 'RecipeController@updateImage');
 Route::resource('recipe', 'RecipeController');
 
 //
+// Author resource route:
+
+Route::resource('author', 'AuthorController');
+
+//
 // Ingredient resource route:
 
 Route::put('ingredient/update_orders', 'IngredientController@updateOrders');

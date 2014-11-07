@@ -19,6 +19,15 @@
     <div class="collapse navbar-collapse" id="main_navigation">
       <ul class="nav navbar-nav navbar-right">
         <li <?php
+          if (Request::is('author')) {
+            echo 'class="active"';
+          }
+        ?>
+        >
+          <a href="{{ URL::route('author.index') }}">
+            Authors</a>
+        </li>
+        <li <?php
           if (Request::is('recipe')) {
             echo 'class="active"';
           }

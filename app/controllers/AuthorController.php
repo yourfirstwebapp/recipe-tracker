@@ -23,7 +23,7 @@ class AuthorController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('author.create');
 	}
 
 
@@ -34,55 +34,20 @@ class AuthorController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
-	}
+		$author = new Author;
+    $author->name = Input::get('name');
 
+    $success = $author->save();
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
+    if ($success) {
+    	return Redirect::route('author.index')
+		    ->with('message',
+		      StatusMessage::success('Author created!'));
+    }
+    else {
+	    return Redirect::route('author.create')
+	      ->with('errors', $author->errors());
+	  }
 	}
 
 

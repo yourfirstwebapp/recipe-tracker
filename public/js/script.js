@@ -27,13 +27,14 @@ $(document).ready(function() {
    */
 
   $('.recipe-item-form').submit(function(e) {
+
+    // Prevent the traditional form submission
     e.preventDefault();
 
+    // The form element
     var $form = $(this);
-    var $itemContainer = $form.closest('.recipe-item-container');
 
-    // Get the form's URL from its "action" attribute
-    // that was set with the proper url using form_open()
+    // The form's URL
     var formURL = $form.attr('action');
 
     // Get the form inputs' values in a string
@@ -42,6 +43,7 @@ $(document).ready(function() {
 
     // Get the current number of items
     // and set our new item's order to that number + 1
+    var $itemContainer = $form.closest('.recipe-item-container');
     var $itemList = $itemContainer.find('.list-group');
     var itemOrder = $itemList.find('li').length + 1;
 
@@ -52,22 +54,22 @@ $(document).ready(function() {
     $.post(
       formURL,
       formData,
-      function(json) {
+      function(jsonObject) {
         // Remove any previous errors
         $form.find('.alert').remove();
 
         // Act according to the status returned
-        var status = json["status"];
+        var status = jsonObject["status"];
         if (status == "success") {
-          var itemHTML = json["item"];
+          var itemHTML = jsonObject["item"];
           $itemList.append(itemHTML);
 
           // Reset the text input values and hide the form
           $form.find('input[type="text"]').val('');
-          $form.hide();
+          $form.addClass('hide');
         }
         else if (status == "fail") {
-          var errorsHTML = json["errors"];
+          var errorsHTML = jsonObject["errors"];
           $form.prepend(errorsHTML);
         }
       },
@@ -87,12 +89,12 @@ $(document).ready(function() {
     var $form = $(this);
     var formURL = $form.attr('action');
     var formData = $form.serialize();
-    var $item = $form.closest('.list-group-item');
 
     $.post(
       formURL,
       formData,
       function(json) {
+        var $item = $form.closest('.list-group-item');
         $item.fadeOut(function() {
           $item.remove();
         });
@@ -110,33 +112,33 @@ $(document).ready(function() {
   // Make the ingredient and step list items sortable
   $('.recipe-item-list').sortable({
     stop: function(e, ui) {
-      // Access the dragged item via ui object
-      // supplied by jQuery UI & its parent list
+      // Access the dragged item and parent list
       var $draggedItem = ui.item;
       var $itemList = $draggedItem.closest('.list-group');
 
-      // Get an array (converted to a string) of the
-      // items' ids, using the sortable toArray() function
+      // The request URL
+      var requestURL = $itemList.attr('data-update-orders-url');
+
+      // Get the items' ids from their data-id attributes
       var itemIdArray = $itemList.sortable('toArray',
         { attribute: 'data-id' });
 
-      var controllerActionURL = $itemList.attr('data-update-orders-url');
-      var submitData = {
+      var requestData = {
         ids: itemIdArray,
         _method: 'put'
       };
 
       // Make the Ajax request
       $.post(
-        controllerActionURL,
-        submitData,
-        function(json) {
+        requestURL,
+        requestData,
+        function(jsonObject) {
           // Show a success message
-          var $message = $(json.message);
+          var $message = $(jsonObject["message"]);
           $message.insertAfter($itemList);
 
           // Hide the message after 3 seconds
-          var removeMessage = setTimeout(function() {
+          setTimeout(function() {
             $message.fadeOut();
           }, 1500);
         },

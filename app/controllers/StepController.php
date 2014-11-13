@@ -11,34 +11,34 @@ class StepController extends \BaseController {
 	{
 		$recipe_id = Input::get('recipe_id');
 
-		$step = new Step;
-		$step->recipe_id = $recipe_id;
-		$step->instructions = Input::get('instructions');
-		$step->order = Input::get('order');
+    $step = new Step;
+    $step->recipe_id = $recipe_id;
+    $step->instructions = Input::get('instructions');
+    $step->order = Input::get('order');
 
-		$success = $step->save();
+    $success = $step->save();
 
-		$response = array();
-		if ($success) {
-			$step_html = View::make('recipe.partials.step',
-    		array('step' => $step))
-				->render();
-			$response = array(
-	      'status' => 'success',
-	      'item' => $step_html
-	    );
-		}
-		else {
-			$errors_html = View::make('partials.errors',
-				array('errors' => $step->errors()))
-				->render();
-			$response = array(
-	      'status' => 'fail',
-	      'errors' => $errors_html
-	    );
-		}
+    $response = array();
+    if ($success) {
+      $step_html = View::make('recipe.partials.step',
+        array('step' => $step))
+        ->render();
+      $response = array(
+        'status' => 'success',
+        'item' => $step_html
+      );
+    }
+    else {
+      $errors_html = View::make('partials.errors',
+        array('errors' => $step->errors()))
+        ->render();
+      $response = array(
+        'status' => 'fail',
+        'errors' => $errors_html
+      );
+    }
 
-		return Response::json($response);
+    return Response::json($response);
 	}
 
 

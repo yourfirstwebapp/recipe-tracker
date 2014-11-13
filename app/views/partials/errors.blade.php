@@ -1,4 +1,4 @@
-@if (Session::has('errors') && Session::get('errors')->has())
+@if (isset($errors) && $errors->has())
   {{ StatusMessage::danger(
-    implode('<br>', Session::get('errors')->all()) ) }}
+    implode('<br>', $errors->all()) ) }}
 @endif

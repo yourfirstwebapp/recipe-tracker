@@ -37,7 +37,8 @@ Route::resource('recipe', 'RecipeController');
 //
 // Author resource route:
 
-Route::resource('author', 'AuthorController');
+Route::resource('author', 'AuthorController',
+  array('only' => array('index', 'create', 'store')));
 
 //
 // Ingredient resource route:

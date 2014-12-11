@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Create a Recipe')
+@section('title', 'Page Not Found')
 
 @section('content')
 

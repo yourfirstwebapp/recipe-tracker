@@ -14,7 +14,7 @@
     )) }}
 
     {{ View::make('recipe.partials.recipe_form',
-      array('authors' => $authors, 'recipe' => $recipe))}}
+      array('authors' => $authors))}}
 
     <div class="form-group">
       {{ Form::submit('Update',
@@ -23,18 +23,7 @@
 
   {{ Form::close() }}
 
-  {{ Form::model($recipe,
-    array(
-      'route' => array('recipe.destroy', $recipe->id),
-      'method' => 'delete',
-      'class' => 'delete-recipe-form'
-    )) }}
-
-    <div class="form-group">
-      <button type="submit" class="btn btn-danger">
-        Delete Recipe</button>
-    </div>
-
-  {{ Form:: close() }}
+  {{ View::make('recipe.partials.delete_recipe',
+    array('recipe' => $recipe)) }}
 
 @stop

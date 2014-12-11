@@ -12,7 +12,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="{{ URL::action('PageController@index') }}">
-        Recipe Tracker</a>
+        Recipe Book</a>
     </div>
 
     <!-- Navigation -->

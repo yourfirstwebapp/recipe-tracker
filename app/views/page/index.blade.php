@@ -3,10 +3,10 @@
 @section('title', 'Home')
 
 @section('content')
-  <h1>Recipe Tracker</h1>
+  <h1>Recipe Book</h1>
   <p>
     This is the home page for the
     <a href="http://yourfirstwebapp.com/">Your First Web App</a>
-    recipe tracker web app.
+    recipe book web app.
   </p>
 @stop

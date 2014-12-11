@@ -8,16 +8,6 @@ class Recipe extends Ardent {
   // Database table name
   protected $table = 'recipes';
 
-  // // Fields allowed to be mass-assigned
-  // protected $fillable = array(
-  //   'author_id',
-  //   'name',
-  //   'image',
-  //   'servings',
-  //   'time_prep',
-  //   'time_cook',
-  // );
-
   // Validation rules
   public static $rules = array(
     'name' => 'required',
@@ -32,40 +22,16 @@ class Recipe extends Ardent {
   );
 
 
-  //
-  // Hooks:
+  // //
+  // // Hooks:
 
-  // Run before a save is made to a database entry
-  public function beforeSave() {
-    // If there's a new image, move it to
-    // the designated folder
-    if ($this->isDirty('image')) {
-      // Set the destination to our public/uploads folder
-      // and name to the following format:
-      // [id]_[timestamp].[extension]
-      $destinationFolder = 'uploads';
-      $destinationPath = public_path() . '/' . $destinationFolder;
-      $fileName = $this->id . '_' . time()
-        . '.' . $this->image->getClientOriginalExtension();
-
-      // Upload the file and move it to the uploads folder
-      $this->image->move($destinationPath, $fileName);
-
-      // Set the new image file's path
-      $newPath = $destinationFolder . '/' . $fileName;
-
-      // Update the recipe's database entry
-      $this->image = $newPath;
-    }
-  }
-
-  // Delete a recipe's related items
-  // (i.e. ingredients and steps), before deleting
-  // the recipe itself
-  public function beforeDelete() {
-    $this->ingredients()->delete();
-    $this->steps()->delete();
-  }
+  // // Delete a recipe's related items
+  // // (i.e. ingredients and steps), before deleting
+  // // the recipe itself
+  // public function beforeDelete() {
+  //   $this->ingredients()->delete();
+  //   $this->steps()->delete();
+  // }
 
 
   //

@@ -40,17 +40,7 @@ class RecipeController extends \BaseController {
 		// Create a new recipe using the
     // user-submitted input data
     $recipe = new Recipe;
-    $recipe->name = Input::get('name');
-    $recipe->author_id = Input::get('author_id');
-    $recipe->servings = Input::get('servings');
-    $recipe->time_prep =
-      Input::get('time_prep_hours')
-      . ':' . Input::get('time_prep_minutes')
-      . ':00';
-    $recipe->time_cook =
-      Input::get('time_cook_hours')
-      . ':' . Input::get('time_cook_minutes')
-      . ':00';
+    $recipe->setInputData();
 
     // Save the recipe entry into the database
     $success = $recipe->save();
@@ -110,13 +100,10 @@ class RecipeController extends \BaseController {
 	 */
 	public function update($id) {
 		$recipe = Recipe::findOrFail($id);
+    $recipe->setInputData();
 
 		// Unset the recipe's image to bypass validation
 	  unset($recipe->image);
-
-	  // Set the recipe's data according
-	  // to user-inputted values
-		$recipe->setInputData();
 
 		$success = $recipe->save();
 
@@ -139,28 +126,32 @@ class RecipeController extends \BaseController {
 	public function updateImage($id)
 	{
 		if (Input::hasFile('image'))
-		{
-			// Get the recipe from the database
-			$recipe = Recipe::find($id);
+    {
+      // Retrieve the recipe
+      $recipe = Recipe::find($id);
 
-			// Set the image, and check if it's valid
-			$recipe->image = Input::file('image');
-			$success = $recipe->save();
+      // Set the image
+      $recipe->image = Input::file('image');
 
-			// Redirect and show the appropriate message
-			if ($success) {
-				return Redirect::route('recipe.show', array('id' => $id))
-					->with('message', StatusMessage::success('Recipe image updated.'));
-			}
-			else {
-				return Redirect::route('recipe.show', array('id' => $id))
-					->with('errors', $recipe->errors());
-			}
-		}
+      // Validate the recipe to make sure the file is an image
+      if ( $recipe->validate() ) {
+        // Move the file and save the recipe
+        $uploadsPath = $recipe->image->move('uploads');
+        $recipe->image = $uploadsPath;
+        $recipe->save();
 
-		// Noting to update...
-		// just go back to the recipe's page
-		return Redirect::route('recipe.show', array('id' => $id));
+        return Redirect::route('recipe.show', array('id' => $id))
+          ->with('message', StatusMessage::success('Recipe image updated.'));
+      }
+      else {
+        return Redirect::route('recipe.show', array('id' => $id))
+          ->with('errors', $recipe->errors());
+      }
+    }
+
+    // Go back to the recipe's page and show an error
+    return Redirect::route('recipe.show', array('id' => $id))
+      ->with('message', StatusMessage::danger('Please select an image file.'));
 	}
 
 
